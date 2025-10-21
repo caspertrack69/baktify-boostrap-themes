@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings - Baktify Bootstrap Theme</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg" />
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">
+                <i class="bi bi-gem"></i>
+                <span>Baktify</span>
+            </a>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="sidebar-menu-item">
+                <a href="index.html" class="sidebar-menu-link">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="analytics.html" class="sidebar-menu-link">
+                    <i class="bi bi-graph-up-arrow"></i>
+                    <span>Analytics</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="users.html" class="sidebar-menu-link">
+                    <i class="bi bi-people"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="projects.html" class="sidebar-menu-link">
+                    <i class="bi bi-kanban"></i>
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="tables.html" class="sidebar-menu-link">
+                    <i class="bi bi-table"></i>
+                    <span>Tables</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="profile.html" class="sidebar-menu-link">
+                    <i class="bi bi-person-circle"></i>
+                    <span>Profile</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="settings.html" class="sidebar-menu-link active">
+                    <i class="bi bi-gear"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Navbar -->
+    <nav class="navbar-custom">
+        <button class="navbar-icon-btn sidebar-toggle d-lg-none">
+            <i class="bi bi-list"></i>
+        </button>
+        <div class="navbar-search">
+            <div class="search-wrapper">
+                <i class="bi bi-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search settings..." />
+            </div>
+        </div>
+        <div class="navbar-actions">
+            <button class="navbar-icon-btn" data-theme-toggle aria-label="Switch theme">
+                <i class="bi bi-moon-stars"></i>
+            </button>
+            <span class="theme-pill d-none d-md-inline-flex" data-theme-label>Default Glow</span>
+            <div class="user-profile">
+                <img src="https://ui-avatars.com/api/?name=John+Doe&background=667eea&color=fff" alt="User" class="user-avatar" />
+                <div class="user-info">
+                    <span class="user-name">John Doe</span>
+                    <span class="user-role">Administrator</span>
+                </div>
+                <i class="bi bi-chevron-down" style="color:#fff;font-size:14px;"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Settings</h1>
+            <p class="page-subtitle">Configure application preferences.</p>
+        </div>
+
+        <div class="content-grid">
+            <section class="card-glass col-span-4">
+                <div class="card-header-glass">
+                    <h2 class="card-title-glass"><i class="bi bi-sliders me-2"></i>Navigation</h2>
+                </div>
+                <ul class="list-unstyled m-0">
+                    <li class="mb-2"><a href="#general" class="btn-glass w-100">General</a></li>
+                    <li class="mb-2"><a href="#appearance" class="btn-glass w-100">Appearance</a></li>
+                    <li class="mb-2"><a href="#notifications" class="btn-glass w-100">Notifications</a></li>
+                    <li><a href="#security" class="btn-glass w-100">Security</a></li>
+                </ul>
+            </section>
+
+            <section class="card-glass col-span-8" id="general">
+                <div class="card-header-glass">
+                    <h2 class="card-title-glass"><i class="bi bi-gear-wide-connected me-2"></i>General</h2>
+                    <div class="card-actions">
+                        <button class="btn-glass" id="saveGeneral"><i class="bi bi-check2-circle me-1"></i>Save</button>
+                    </div>
+                </div>
+                <form class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label text-white-75">App Name</label>
+                        <input class="form-control" value="Baktify" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label text-white-75">Default Language</label>
+                        <select class="form-select" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;">
+                            <option>English</option>
+                            <option>Bahasa Indonesia</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label text-white-75">Brand Description</label>
+                        <textarea class="form-control" rows="3" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;">Modern Glassmorphism Dashboard Theme</textarea>
+                    </div>
+                </form>
+            </section>
+
+            <section class="card-glass col-span-6" id="appearance">
+                <div class="card-header-glass">
+                    <h2 class="card-title-glass"><i class="bi bi-palette me-2"></i>Appearance</h2>
+                </div>
+                <div class="d-grid gap-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="darkModeSwitch">
+                        <label class="form-check-label text-white-75" for="darkModeSwitch">Dark Mode</label>
+                    </div>
+                    <div>
+                        <label class="form-label text-white-75">Blur Intensity</label>
+                        <input id="blurRange" type="range" min="6" max="20" value="12" class="form-range">
+                        <div class="text-white-50 small">Adjusts backdrop blur strength</div>
+                    </div>
+                    <div>
+                        <label class="form-label text-white-75">Accent Color</label>
+                        <input id="accentColor" type="color" value="#667eea" class="form-control form-control-color" />
+                    </div>
+                </div>
+            </section>
+
+            <section class="card-glass col-span-6" id="notifications">
+                <div class="card-header-glass">
+                    <h2 class="card-title-glass"><i class="bi bi-bell me-2"></i>Notifications</h2>
+                </div>
+                <div class="d-grid gap-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="emailNotif" checked>
+                        <label class="form-check-label text-white-75" for="emailNotif">Email Notifications</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="pushNotif" checked>
+                        <label class="form-check-label text-white-75" for="pushNotif">Push Notifications</label>
+                    </div>
+                    <div>
+                        <label class="form-label text-white-75">Digest Frequency</label>
+                        <select class="form-select" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;">
+                            <option>Daily</option>
+                            <option>Weekly</option>
+                            <option>Monthly</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card-glass col-span-12" id="security">
+                <div class="card-header-glass">
+                    <h2 class="card-title-glass"><i class="bi bi-shield-lock me-2"></i>Security</h2>
+                    <div class="card-actions">
+                        <button class="btn-glass" id="saveSecurity"><i class="bi bi-lock-fill me-1"></i>Update</button>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="twoFA" checked>
+                            <label class="form-check-label text-white-75" for="twoFA">Enable 2FA</label>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label text-white-75">Trusted Devices</label>
+                        <div class="d-flex gap-2 flex-wrap">
+                            <span class="btn-glass">Windows PC</span>
+                            <span class="btn-glass">iPhone 15</span>
+                            <span class="btn-glass">iPad Pro</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="sidebar-overlay"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script>
+        (function(){
+            // Dark mode toggle (uses ThemeController)
+            const darkSwitch = document.getElementById('darkModeSwitch');
+            if (darkSwitch) {
+                const syncThemeSwitch = (themeId) => {
+                    darkSwitch.checked = themeId === 'dark';
+                    darkSwitch.indeterminate = themeId === 'aurora';
+                };
+                
+                syncThemeSwitch(localStorage.getItem('theme') || 'default');
+                
+                window.addEventListener('themechange', (event) => {
+                    syncThemeSwitch(event.detail?.id || 'default');
+                });
+                
+                darkSwitch.addEventListener('change', () => {
+                    const controller = window.baktifyTheme;
+                    const targetTheme = darkSwitch.checked ? 'dark' : 'default';
+                    if (controller && typeof controller.setTheme === 'function') {
+                        controller.setTheme(targetTheme);
+                    } else {
+                        document.body.setAttribute('data-theme', targetTheme);
+                        localStorage.setItem('theme', targetTheme);
+                    }
+                });
+            }
+
+            // Dynamic blur control
+            const blurRange = document.getElementById('blurRange');
+            if (blurRange) {
+                blurRange.addEventListener('input', () => {
+                    document.documentElement.style.setProperty('--glass-blur', blurRange.value + 'px');
+                    // Apply to known glass selectors
+                    document.querySelectorAll('.glass, .glass-card, .card-glass, .sidebar, .navbar-custom').forEach(el => {
+                        el.style.backdropFilter = `blur(${blurRange.value}px)`;
+                        el.style.webkitBackdropFilter = `blur(${blurRange.value}px)`;
+                    });
+                });
+            }
+
+            // Accent color demo
+            const accent = document.getElementById('accentColor');
+            if (accent) {
+                accent.addEventListener('input', () => {
+                    document.body.style.setProperty('--accent', accent.value);
+                });
+            }
+        })();
+    </script>
+</body>
+</html>

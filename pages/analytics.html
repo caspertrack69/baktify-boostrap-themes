@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baktify - Analytics</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/glassmorphism.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Include Sidebar -->
+    <div id="sidebar">
+        <!-- Sidebar content will be loaded here -->
+        <!-- Include sidebar.html -->
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Include Navbar -->
+        <div id="navbar">
+            <!-- Navbar content will be loaded here -->
+            <!-- Include navbar.html -->
+        </div>
+
+        <div class="container">
+            <h1 class="page-title">Analytics Overview</h1>
+            <div class="analytics-cards">
+                <div class="card glass">
+                    <h2>Total Users</h2>
+                    <p>1,234</p>
+                </div>
+                <div class="card glass">
+                    <h2>Active Sessions</h2>
+                    <p>567</p>
+                </div>
+                <div class="card glass">
+                    <h2>New Signups</h2>
+                    <p>89</p>
+                </div>
+                <div class="card glass">
+                    <h2>Revenue</h2>
+                    <p>$12,345</p>
+                </div>
+            </div>
+
+            <div class="charts">
+                <h2>Traffic Sources</h2>
+                <canvas id="trafficChart"></canvas>
+            </div>
+
+            <div class="recent-activity">
+                <h2>Recent Activity</h2>
+                <table class="table glass">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Action</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>Signed up</td>
+                            <td>2023-10-01</td>
+                        </tr>
+                        <tr>
+                            <td>Jane Smith</td>
+                            <td>Updated profile</td>
+                            <td>2023-10-02</td>
+                        </tr>
+                        <tr>
+                            <td>Mike Johnson</td>
+                            <td>Made a purchase</td>
+                            <td>2023-10-03</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Include Footer -->
+        <div id="footer">
+            <!-- Footer content will be loaded here -->
+            <!-- Include footer.html -->
+        </div>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+    <script src="../assets/js/components.js"></script>
+</body>
+</html>

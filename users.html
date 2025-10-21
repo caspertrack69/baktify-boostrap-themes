@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users - Baktify Bootstrap Theme</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg" />
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">
+                <i class="bi bi-gem"></i>
+                <span>Baktify</span>
+            </a>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="sidebar-menu-item">
+                <a href="index.html" class="sidebar-menu-link">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="analytics.html" class="sidebar-menu-link">
+                    <i class="bi bi-graph-up-arrow"></i>
+                    <span>Analytics</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="users.html" class="sidebar-menu-link active">
+                    <i class="bi bi-people"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="projects.html" class="sidebar-menu-link">
+                    <i class="bi bi-kanban"></i>
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="tables.html" class="sidebar-menu-link">
+                    <i class="bi bi-table"></i>
+                    <span>Tables</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="profile.html" class="sidebar-menu-link">
+                    <i class="bi bi-person-circle"></i>
+                    <span>Profile</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="settings.html" class="sidebar-menu-link">
+                    <i class="bi bi-gear"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Navbar -->
+    <nav class="navbar-custom">
+        <button class="navbar-icon-btn sidebar-toggle d-lg-none">
+            <i class="bi bi-list"></i>
+        </button>
+        <div class="navbar-search">
+            <div class="search-wrapper">
+                <i class="bi bi-search search-icon"></i>
+                <input id="userSearch" type="text" class="search-input" placeholder="Search users..." />
+            </div>
+        </div>
+        <div class="navbar-actions">
+            <button class="navbar-icon-btn" data-notification-toggle>
+                <i class="bi bi-bell"></i>
+                <span class="notification-badge">1</span>
+            </button>
+            <button class="navbar-icon-btn" data-theme-toggle aria-label="Switch theme">
+                <i class="bi bi-moon-stars"></i>
+            </button>
+            <span class="theme-pill d-none d-md-inline-flex" data-theme-label>Default Glow</span>
+            <div class="user-profile">
+                <img src="https://ui-avatars.com/api/?name=John+Doe&background=667eea&color=fff" alt="User" class="user-avatar" />
+                <div class="user-info">
+                    <span class="user-name">John Doe</span>
+                    <span class="user-role">Administrator</span>
+                </div>
+                <i class="bi bi-chevron-down" style="color:#fff;font-size:14px;"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Users</h1>
+            <p class="page-subtitle">Manage team members with layered glass UI.</p>
+        </div>
+
+        <!-- Controls -->
+        <div class="card-glass mb-4">
+            <div class="d-flex flex-wrap gap-2 align-items-center">
+                <div class="flex-grow-1">
+                    <input id="filterInput" class="search-input w-100" placeholder="Type name, email, or role..." />
+                </div>
+                <select id="roleSelect" class="form-select" style="max-width:200px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;">
+                    <option value="">All roles</option>
+                    <option>Administrator</option>
+                    <option>Manager</option>
+                    <option>Editor</option>
+                    <option>Viewer</option>
+                </select>
+                <select id="statusSelect" class="form-select" style="max-width:200px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;">
+                    <option value="">All status</option>
+                    <option value="active">Active</option>
+                    <option value="pending">Pending</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+                <div class="ms-auto d-flex gap-2">
+                    <button id="btnGrid" class="btn-glass"><i class="bi bi-grid"></i></button>
+                    <button id="btnList" class="btn-glass"><i class="bi bi-list"></i></button>
+                    <button id="btnInvite" class="btn-glass"><i class="bi bi-person-plus me-1"></i>Invite</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grid view -->
+        <div id="usersGrid" class="content-grid">
+            <!-- 8 sample cards -->
+            <div class="card-glass p-3 col-span-3" data-role="Administrator" data-status="active">
+                <div class="d-flex align-items-center gap-3">
+                    <img class="rounded-circle" src="https://ui-avatars.com/api/?name=Alice+Johnson&background=667eea&color=fff" width="56" height="56" />
+                    <div>
+                        <div class="text-white fw-semibold">Alice Johnson</div>
+                        <div class="text-white-75 small">alice@example.com</div>
+                    </div>
+                    <span class="ms-auto status-badge active">Active</span>
+                </div>
+                <div class="d-flex gap-2 mt-3">
+                    <span class="badge rounded-pill" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;">Administrator</span>
+                    <button class="btn-glass btn-sm ms-auto"><i class="bi bi-chat-dots"></i></button>
+                </div>
+            </div>
+
+            <div class="card-glass p-3 col-span-3" data-role="Manager" data-status="pending">
+                <div class="d-flex align-items-center gap-3">
+                    <img class="rounded-circle" src="https://ui-avatars.com/api/?name=Bob+Smith&background=4facfe&color=fff" width="56" height="56" />
+                    <div>
+                        <div class="text-white fw-semibold">Bob Smith</div>
+                        <div class="text-white-75 small">bob@example.com</div>
+                    </div>
+                    <span class="ms-auto status-badge pending">Pending</span>
+                </div>
+                <div class="d-flex gap-2 mt-3">
+                    <span class="badge rounded-pill" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;">Manager</span>
+                    <button class="btn-glass btn-sm ms-auto"><i class="bi bi-chat-dots"></i></button>
+                </div>
+            </div>
+
+            <div class="card-glass p-3 col-span-3" data-role="Editor" data-status="inactive">
+                <div class="d-flex align-items-center gap-3">
+                    <img class="rounded-circle" src="https://ui-avatars.com/api/?name=Carol+White&background=fa709a&color=fff" width="56" height="56" />
+                    <div>
+                        <div class="text-white fw-semibold">Carol White</div>
+                        <div class="text-white-75 small">carol@example.com</div>
+                    </div>
+                    <span class="ms-auto status-badge inactive">Inactive</span>
+                </div>
+                <div class="d-flex gap-2 mt-3">
+                    <span class="badge rounded-pill" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;">Editor</span>
+                    <button class="btn-glass btn-sm ms-auto"><i class="bi bi-chat-dots"></i></button>
+                </div>
+            </div>
+
+            <div class="card-glass p-3 col-span-3" data-role="Viewer" data-status="active">
+                <div class="d-flex align-items-center gap-3">
+                    <img class="rounded-circle" src="https://ui-avatars.com/api/?name=David+Brown&background=764ba2&color=fff" width="56" height="56" />
+                    <div>
+                        <div class="text-white fw-semibold">David Brown</div>
+                        <div class="text-white-75 small">david@example.com</div>
+                    </div>
+                    <span class="ms-auto status-badge active">Active</span>
+                </div>
+                <div class="d-flex gap-2 mt-3">
+                    <span class="badge rounded-pill" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;">Viewer</span>
+                    <button class="btn-glass btn-sm ms-auto"><i class="bi bi-chat-dots"></i></button>
+                </div>
+            </div>
+
+            <div class="card-glass p-3 col-span-3" data-role="Manager" data-status="active">
+                <div class="d-flex align-items-center gap-3">
+                    <img class="rounded-circle" src="https://ui-avatars.com/api/?name=Emma+Green&background=00f2fe&color=fff" width="56" height="56" />
+                    <div>
+                        <div class="text-white fw-semibold">Emma Green</div>
+                        <div class="text-white-75 small">emma@example.com</div>
+                    </div>
+                    <span class="ms-auto status-badge active">Active</span>
+                </div>
+                <div class="d-flex gap-2 mt-3">
+                    <span class="badge rounded-pill" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;">Manager</span>
+                    <button class="btn-glass btn-sm ms-auto"><i class="bi bi-chat-dots"></i></button>
+                </div>
+            </div>
+
+            <div class="card-glass p-3 col-span-3" data-role="Editor" data-status="pending">
+                <div class="d-flex align-items-center gap-3">
+                    <img class="rounded-circle" src="https://ui-avatars.com/api/?name=Frank+Miller&background=f5576c&color=fff" width="56" height="56" />
+                    <div>
+                        <div class="text-white fw-semibold">Frank Miller</div>
+                        <div class="text-white-75 small">frank@example.com</div>
+                    </div>
+                    <span class="ms-auto status-badge pending">Pending</span>
+                </div>
+                <div class="d-flex gap-2 mt-3">
+                    <span class="badge rounded-pill" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;">Editor</span>
+                    <button class="btn-glass btn-sm ms-auto"><i class="bi bi-chat-dots"></i></button>
+                </div>
+            </div>
+
+            <div class="card-glass p-3 col-span-3" data-role="Viewer" data-status="inactive">
+                <div class="d-flex align-items-center gap-3">
+                    <img class="rounded-circle" src="https://ui-avatars.com/api/?name=Grace+Lee&background=fa709a&color=fff" width="56" height="56" />
+                    <div>
+                        <div class="text-white fw-semibold">Grace Lee</div>
+                        <div class="text-white-75 small">grace@example.com</div>
+                    </div>
+                    <span class="ms-auto status-badge inactive">Inactive</span>
+                </div>
+                <div class="d-flex gap-2 mt-3">
+                    <span class="badge rounded-pill" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;">Viewer</span>
+                    <button class="btn-glass btn-sm ms-auto"><i class="bi bi-chat-dots"></i></button>
+                </div>
+            </div>
+
+            <div class="card-glass p-3 col-span-3" data-role="Administrator" data-status="active">
+                <div class="d-flex align-items-center gap-3">
+                    <img class="rounded-circle" src="https://ui-avatars.com/api/?name=Henry+Adams&background=764ba2&color=fff" width="56" height="56" />
+                    <div>
+                        <div class="text-white fw-semibold">Henry Adams</div>
+                        <div class="text-white-75 small">henry@example.com</div>
+                    </div>
+                    <span class="ms-auto status-badge active">Active</span>
+                </div>
+                <div class="d-flex gap-2 mt-3">
+                    <span class="badge rounded-pill" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;">Administrator</span>
+                    <button class="btn-glass btn-sm ms-auto"><i class="bi bi-chat-dots"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- List view -->
+        <div id="usersList" class="card-glass mt-4" style="display:none;">
+            <div class="table-responsive">
+                <table class="table-glass mb-0">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Joined</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersListBody">
+                        <tr data-role="Administrator" data-status="active">
+                            <td class="text-white">Alice Johnson</td>
+                            <td class="text-white-75">alice@example.com</td>
+                            <td class="text-white-75">Administrator</td>
+                            <td><span class="status-badge active">Active</span></td>
+                            <td class="text-white-75">2025-07-14</td>
+                            <td class="text-end">
+                                <button class="btn-glass btn-sm"><i class="bi bi-pencil"></i></button>
+                                <button class="btn-glass btn-sm"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr data-role="Manager" data-status="pending">
+                            <td class="text-white">Bob Smith</td>
+                            <td class="text-white-75">bob@example.com</td>
+                            <td class="text-white-75">Manager</td>
+                            <td><span class="status-badge pending">Pending</span></td>
+                            <td class="text-white-75">2025-05-02</td>
+                            <td class="text-end">
+                                <button class="btn-glass btn-sm"><i class="bi bi-pencil"></i></button>
+                                <button class="btn-glass btn-sm"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr data-role="Editor" data-status="inactive">
+                            <td class="text-white">Carol White</td>
+                            <td class="text-white-75">carol@example.com</td>
+                            <td class="text-white-75">Editor</td>
+                            <td><span class="status-badge inactive">Inactive</span></td>
+                            <td class="text-white-75">2025-01-22</td>
+                            <td class="text-end">
+                                <button class="btn-glass btn-sm"><i class="bi bi-pencil"></i></button>
+                                <button class="btn-glass btn-sm"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr data-role="Viewer" data-status="active">
+                            <td class="text-white">David Brown</td>
+                            <td class="text-white-75">david@example.com</td>
+                            <td class="text-white-75">Viewer</td>
+                            <td><span class="status-badge active">Active</span></td>
+                            <td class="text-white-75">2024-12-10</td>
+                            <td class="text-end">
+                                <button class="btn-glass btn-sm"><i class="bi bi-pencil"></i></button>
+                                <button class="btn-glass btn-sm"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <div class="sidebar-overlay"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script>
+        (function(){
+            const filterInput = document.getElementById('filterInput');
+            const roleSelect = document.getElementById('roleSelect');
+            const statusSelect = document.getElementById('statusSelect');
+            const usersGrid = document.getElementById('usersGrid');
+            const usersList = document.getElementById('usersList');
+            const btnGrid = document.getElementById('btnGrid');
+            const btnList = document.getElementById('btnList');
+
+            const applyFilter = () => {
+                const q = (filterInput.value || '').toLowerCase();
+                const role = roleSelect.value;
+                const status = statusSelect.value;
+
+                // Grid cards
+                document.querySelectorAll('#usersGrid .card-glass').forEach(card => {
+                    const text = card.innerText.toLowerCase();
+                    const okQ = !q || text.includes(q);
+                    const okRole = !role || card.getAttribute('data-role') === role;
+                    const okStatus = !status || card.getAttribute('data-status') === status;
+                    card.style.display = okQ && okRole && okStatus ? '' : 'none';
+                });
+
+                // List rows
+                document.querySelectorAll('#usersListBody tr').forEach(row => {
+                    const text = row.innerText.toLowerCase();
+                    const okQ = !q || text.includes(q);
+                    const okRole = !role || row.getAttribute('data-role') === role;
+                    const okStatus = !status || row.getAttribute('data-status') === status;
+                    row.style.display = okQ && okRole && okStatus ? '' : 'none';
+                });
+            };
+
+            const debounced = Utils ? Utils.debounce(applyFilter, 200) : applyFilter;
+            filterInput.addEventListener('input', debounced);
+            roleSelect.addEventListener('change', applyFilter);
+            statusSelect.addEventListener('change', applyFilter);
+
+            btnGrid.addEventListener('click', () => {
+                usersGrid.style.display = '';
+                usersList.style.display = 'none';
+            });
+            btnList.addEventListener('click', () => {
+                usersGrid.style.display = 'none';
+                usersList.style.display = '';
+            });
+        })();
+    </script>
+</body>
+</html>

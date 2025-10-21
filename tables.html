@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tables - Baktify Bootstrap Theme</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">
+                <i class="bi bi-gem"></i>
+                <span>Baktify</span>
+            </a>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="sidebar-menu-item">
+                <a href="index.html" class="sidebar-menu-link">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="analytics.html" class="sidebar-menu-link">
+                    <i class="bi bi-graph-up-arrow"></i>
+                    <span>Analytics</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="users.html" class="sidebar-menu-link">
+                    <i class="bi bi-people"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="projects.html" class="sidebar-menu-link">
+                    <i class="bi bi-kanban"></i>
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="tables.html" class="sidebar-menu-link active">
+                    <i class="bi bi-table"></i>
+                    <span>Tables</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="profile.html" class="sidebar-menu-link">
+                    <i class="bi bi-person-circle"></i>
+                    <span>Profile</span>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="settings.html" class="sidebar-menu-link">
+                    <i class="bi bi-gear"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Navbar -->
+    <nav class="navbar-custom">
+        <button class="navbar-icon-btn sidebar-toggle d-lg-none">
+            <i class="bi bi-list"></i>
+        </button>
+
+        <div class="navbar-search">
+            <div class="search-wrapper">
+                <i class="bi bi-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search table...">
+            </div>
+        </div>
+
+        <div class="navbar-actions">
+            <button class="navbar-icon-btn" data-notification-toggle>
+                <i class="bi bi-bell"></i>
+                <span class="notification-badge">2</span>
+            </button>
+            <button class="navbar-icon-btn" data-theme-toggle aria-label="Switch theme">
+                <i class="bi bi-moon-stars"></i>
+            </button>
+            <span class="theme-pill d-none d-md-inline-flex" data-theme-label>Default Glow</span>
+            <div class="user-profile">
+                <img src="https://ui-avatars.com/api/?name=John+Doe&background=667eea&color=fff" alt="User" class="user-avatar">
+                <div class="user-info">
+                    <span class="user-name">John Doe</span>
+                    <span class="user-role">Administrator</span>
+                </div>
+                <i class="bi bi-chevron-down" style="color:#fff;font-size:14px;"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Data Tables</h1>
+            <p class="page-subtitle">Manage users and transactions with a clean glass UI.</p>
+        </div>
+
+        <!-- Filters -->
+        <div class="card-glass mb-4">
+            <div class="card-header-glass">
+                <h2 class="card-title-glass">
+                    <i class="bi bi-funnel me-2"></i>
+                    Filters
+                </h2>
+                <div class="card-actions">
+                    <button class="btn-glass" id="btnExport"><i class="bi bi-download me-1"></i>Export CSV</button>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label text-white-50">Search</label>
+                    <input id="filterSearch" type="text" class="form-control search-input" placeholder="Type a name or email">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label text-white-50">Status</label>
+                    <select id="filterStatus" class="form-select" style="background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25); color:#fff;">
+                        <option value="">All</option>
+                        <option value="active">Active</option>
+                        <option value="pending">Pending</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label text-white-50">Date</label>
+                    <input id="filterDate" type="date" class="form-control" style="background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25); color:#fff;">
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button id="btnApply" class="btn-glass w-100"><i class="bi bi-sliders me-1"></i>Apply</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="card-glass">
+            <div class="card-header-glass">
+                <h2 class="card-title-glass">
+                    <i class="bi bi-people me-2"></i>
+                    Users
+                </h2>
+                <div class="card-actions">
+                    <button class="btn-glass" id="btnAdd"><i class="bi bi-plus-lg me-1"></i>Add User</button>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table-glass" id="usersTable">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Joined</th>
+                            <th>Plan</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersBody">
+                        <tr data-status="active">
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <img src="https://ui-avatars.com/api/?name=Alice+Johnson&background=667eea&color=fff" class="rounded-circle" width="32" height="32" alt="">
+                                    <span class="fw-semibold text-white">Alice Johnson</span>
+                                </div>
+                            </td>
+                            <td class="text-white-75">alice@example.com</td>
+                            <td><span class="status-badge active">Active</span></td>
+                            <td class="text-white-75">2025-07-14</td>
+                            <td class="text-white-75">Pro</td>
+                            <td class="text-end">
+                                <button class="btn-glass btn-sm"><i class="bi bi-pencil"></i></button>
+                                <button class="btn-glass btn-sm"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr data-status="pending">
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <img src="https://ui-avatars.com/api/?name=Bob+Smith&background=4facfe&color=fff" class="rounded-circle" width="32" height="32" alt="">
+                                    <span class="fw-semibold text-white">Bob Smith</span>
+                                </div>
+                            </td>
+                            <td class="text-white-75">bob@example.com</td>
+                            <td><span class="status-badge pending">Pending</span></td>
+                            <td class="text-white-75">2025-05-02</td>
+                            <td class="text-white-75">Free</td>
+                            <td class="text-end">
+                                <button class="btn-glass btn-sm"><i class="bi bi-pencil"></i></button>
+                                <button class="btn-glass btn-sm"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr data-status="inactive">
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <img src="https://ui-avatars.com/api/?name=Carol+White&background=fa709a&color=fff" class="rounded-circle" width="32" height="32" alt="">
+                                    <span class="fw-semibold text-white">Carol White</span>
+                                </div>
+                            </td>
+                            <td class="text-white-75">carol@example.com</td>
+                            <td><span class="status-badge inactive">Inactive</span></td>
+                            <td class="text-white-75">2025-01-22</td>
+                            <td class="text-white-75">Premium</td>
+                            <td class="text-end">
+                                <button class="btn-glass btn-sm"><i class="bi bi-pencil"></i></button>
+                                <button class="btn-glass btn-sm"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr data-status="active">
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <img src="https://ui-avatars.com/api/?name=David+Brown&background=764ba2&color=fff" class="rounded-circle" width="32" height="32" alt="">
+                                    <span class="fw-semibold text-white">David Brown</span>
+                                </div>
+                            </td>
+                            <td class="text-white-75">david@example.com</td>
+                            <td><span class="status-badge active">Active</span></td>
+                            <td class="text-white-75">2024-12-10</td>
+                            <td class="text-white-75">Pro</td>
+                            <td class="text-end">
+                                <button class="btn-glass btn-sm"><i class="bi bi-pencil"></i></button>
+                                <button class="btn-glass btn-sm"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <div class="text-white-75">Showing <span id="showingFrom">1</span>-<span id="showingTo">4</span> of <span id="totalRows">4</span></div>
+                <div class="d-flex gap-2">
+                    <button class="btn-glass btn-sm" id="prevPage"><i class="bi bi-chevron-left"></i></button>
+                    <button class="btn-glass btn-sm" id="nextPage"><i class="bi bi-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="sidebar-overlay"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script>
+        // Simple client-side filter + pager (no jQuery)
+        (function(){
+            const rows = Array.from(document.querySelectorAll('#usersBody tr'));
+            const totalRowsEl = document.getElementById('totalRows');
+            const showFromEl = document.getElementById('showingFrom');
+            const showToEl = document.getElementById('showingTo');
+            const pageSize = 8;
+            let page = 1;
+            let filtered = rows.slice();
+
+            function render() {
+                rows.forEach(r => r.style.display = 'none');
+                const start = (page - 1) * pageSize;
+                const items = filtered.slice(start, start + pageSize);
+                items.forEach(r => r.style.display = '');
+                totalRowsEl.textContent = filtered.length;
+                showFromEl.textContent = filtered.length ? start + 1 : 0;
+                showToEl.textContent = Math.min(start + items.length, filtered.length);
+            }
+
+            function applyFilters() {
+                const q = (document.getElementById('filterSearch').value || '').toLowerCase();
+                const st = document.getElementById('filterStatus').value;
+                const d = document.getElementById('filterDate').value;
+
+                filtered = rows.filter(r => {
+                    const text = r.innerText.toLowerCase();
+                    const okQ = !q || text.includes(q);
+                    const okS = !st || r.getAttribute('data-status') === st;
+                    const okD = !d || r.children[3].innerText.startsWith(d);
+                    return okQ && okS && okD;
+                });
+                page = 1;
+                render();
+            }
+
+            document.getElementById('btnApply').addEventListener('click', applyFilters);
+            document.getElementById('filterSearch').addEventListener('input', Utils ? Utils.debounce(applyFilters, 250) : applyFilters);
+            document.getElementById('prevPage').addEventListener('click', () => { page = Math.max(1, page - 1); render(); });
+            document.getElementById('nextPage').addEventListener('click', () => {
+                const maxPage = Math.ceil(filtered.length / pageSize) || 1;
+                page = Math.min(maxPage, page + 1); render();
+            });
+            document.getElementById('btnExport').addEventListener('click', () => {
+                // Simple CSV export
+                const header = Array.from(document.querySelectorAll('#usersTable thead th')).map(th => th.innerText);
+                const rowsData = filtered.map(r => Array.from(r.children).slice(0,5).map(td => td.innerText.trim()));
+                const csv = [header.slice(0,5).join(','), ...rowsData.map(arr => arr.map(v => `"${v.replace(/"/g, '""')}"`).join(','))].join('\n');
+                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url; a.download = 'users.csv'; a.click();
+                URL.revokeObjectURL(url);
+            });
+
+            render();
+        })();
+    </script>
+</body>
+</html>
