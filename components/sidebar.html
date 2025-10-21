@@ -1,45 +1,101 @@
-<div class="sidebar">
+<aside class="sidebar" data-component="sidebar">
     <div class="sidebar-header">
-        <h2>Baktify</h2>
+        <a href="dashboard.html" class="sidebar-logo">
+            <i class="bi bi-gem"></i>
+            <span>Baktify</span>
+        </a>
     </div>
+
+    <div class="sidebar-progress">
+        <div class="sidebar-progress-meta">
+            <span class="sidebar-progress-label">Workspace Health</span>
+            <span class="sidebar-progress-value" data-sidebar-health>82%</span>
+        </div>
+        <div class="progress progress-thin">
+            <div class="progress-bar" style="width:82%;"></div>
+        </div>
+    </div>
+
     <ul class="sidebar-menu">
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="analytics.html">Analytics</a></li>
-        <li><a href="users.html">Users</a></li>
-        <li><a href="settings.html">Settings</a></li>
+        <li class="sidebar-section-label">Overview</li>
+        <li class="sidebar-menu-item">
+            <a href="dashboard.html" class="sidebar-menu-link" data-route="dashboard">
+                <i class="bi bi-speedometer2"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li class="sidebar-menu-item">
+            <a href="profile.html" class="sidebar-menu-link" data-route="profile">
+                <i class="bi bi-person-circle"></i>
+                <span>Profile</span>
+            </a>
+        </li>
+        <li class="sidebar-menu-item">
+            <a href="analytics.html" class="sidebar-menu-link" data-route="analytics">
+                <i class="bi bi-graph-up-arrow"></i>
+                <span>Analytics</span>
+            </a>
+        </li>
+        <li class="sidebar-menu-item">
+            <a href="reports.html" class="sidebar-menu-link" data-route="reports">
+                <i class="bi bi-bar-chart-line"></i>
+                <span>Reports</span>
+                <span class="sidebar-pill success">Live</span>
+            </a>
+        </li>
+
+        <li class="sidebar-section-label">Execution</li>
+        <li class="sidebar-menu-item">
+            <a href="projects.html" class="sidebar-menu-link" data-route="projects">
+                <i class="bi bi-kanban"></i>
+                <span>Projects</span>
+            </a>
+        </li>
+        <li class="sidebar-menu-item">
+            <a href="users.html" class="sidebar-menu-link" data-route="users">
+                <i class="bi bi-people"></i>
+                <span>Users</span>
+            </a>
+        </li>
+        <li class="sidebar-menu-item">
+            <a href="calendar.html" class="sidebar-menu-link" data-route="calendar">
+                <i class="bi bi-calendar3"></i>
+                <span>Calendar</span>
+            </a>
+        </li>
+        <li class="sidebar-menu-item">
+            <a href="tables.html" class="sidebar-menu-link" data-route="tables">
+                <i class="bi bi-table"></i>
+                <span>Data Tables</span>
+            </a>
+        </li>
+
+        <li class="sidebar-section-label">Monetisation</li>
+        <li class="sidebar-menu-item">
+            <a href="billing.html" class="sidebar-menu-link" data-route="billing">
+                <i class="bi bi-credit-card"></i>
+                <span>Billing</span>
+            </a>
+        </li>
+        <li class="sidebar-menu-item">
+            <a href="support.html" class="sidebar-menu-link" data-route="support">
+                <i class="bi bi-life-preserver"></i>
+                <span>Support Center</span>
+            </a>
+        </li>
+        <li class="sidebar-menu-item">
+            <a href="settings.html" class="sidebar-menu-link" data-route="settings">
+                <i class="bi bi-gear"></i>
+                <span>Settings</span>
+            </a>
+        </li>
     </ul>
-</div>
 
-<style>
-    .sidebar {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .sidebar-header {
-        margin-bottom: 20px;
-    }
-
-    .sidebar-menu {
-        list-style: none;
-        padding: 0;
-    }
-
-    .sidebar-menu li {
-        margin: 15px 0;
-    }
-
-    .sidebar-menu a {
-        text-decoration: none;
-        color: #fff;
-        font-weight: bold;
-        transition: color 0.3s;
-    }
-
-    .sidebar-menu a:hover {
-        color: #00bcd4;
-    }
-</style>
+    <div class="sidebar-footer">
+        <div class="sidebar-upgrade">
+            <div class="sidebar-upgrade-title">Unlock Workflow AI</div>
+            <p class="sidebar-upgrade-copy">Automate insights & forecasting with Baktify Pro add-ons.</p>
+            <a href="billing.html" class="btn-glass w-100">Upgrade Plan</a>
+        </div>
+    </div>
+</aside>

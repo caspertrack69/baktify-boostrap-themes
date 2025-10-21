@@ -1,4 +1,4 @@
-/* ========================================
+﻿/* ========================================
    BAKTIFY BOOTSTRAP THEMES - MAIN STYLES
    Glassmorphism Dashboard Theme
 ======================================== */
@@ -225,6 +225,90 @@ body::before {
     border-left: 3px solid rgba(255, 255, 255, 0.6);
 }
 
+.sidebar-section-label {
+    padding: 18px 24px 8px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 600;
+}
+
+.sidebar-progress {
+    padding: 16px 24px 8px;
+}
+
+.sidebar-progress-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    color: var(--muted-text-color);
+    font-size: 12px;
+}
+
+.sidebar-progress-value {
+    font-weight: 600;
+    color: var(--body-text-color);
+}
+
+.progress-thin {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+}
+
+.progress-thin .progress-bar {
+    background: var(--success-gradient);
+    border-radius: 999px;
+}
+
+.sidebar-pill {
+    margin-left: auto;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.sidebar-pill.success {
+    background: rgba(79, 172, 254, 0.28);
+    border-color: rgba(79, 172, 254, 0.4);
+    color: #fff;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 20px 24px 28px;
+}
+
+.sidebar-upgrade {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 18px;
+    padding: 18px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sidebar-upgrade-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--body-text-color);
+}
+
+.sidebar-upgrade-copy {
+    font-size: 12px;
+    color: var(--muted-text-color);
+    margin: 0;
+    line-height: 1.6;
+}
+
 /* ========================================
    NAVBAR
 ======================================== */
@@ -288,6 +372,17 @@ body::before {
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+.navbar-extra-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-right: 12px;
+}
+
+.navbar-extra-actions .btn-glass {
+    white-space: nowrap;
 }
 
 .navbar-icon-btn {
@@ -591,6 +686,216 @@ body::before {
     transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
+.settings-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 4px;
+}
+
+.settings-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--body-text-color);
+    background: transparent;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.settings-nav-link:hover {
+    background: var(--button-glass-bg);
+    border-color: var(--button-glass-border);
+    transform: translateX(4px);
+}
+
+.settings-nav-link.is-active {
+    background: var(--primary-gradient);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 16px 32px rgba(102, 126, 234, 0.35);
+}
+
+.settings-nav-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: inherit;
+    flex-shrink: 0;
+    transition: inherit;
+}
+
+.settings-nav-link.is-active .settings-nav-icon {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.settings-nav-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.settings-nav-title {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+.settings-nav-subtitle {
+    font-size: 12px;
+    color: var(--muted-text-color);
+}
+
+.settings-nav-link.is-active .settings-nav-subtitle {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.settings-nav-chevron {
+    margin-left: auto;
+    font-size: 16px;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: inherit;
+}
+
+.settings-nav-link:hover .settings-nav-chevron,
+.settings-nav-link.is-active .settings-nav-chevron {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.view-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 6px;
+    border-radius: 14px;
+    background: var(--button-glass-bg);
+    border: 1px solid var(--button-glass-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.btn-glass.btn-icon {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+}
+
+.btn-glass.btn-icon i {
+    font-size: 18px;
+}
+
+.btn-glass.btn-icon.is-active {
+    background: var(--primary-gradient);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 12px 28px rgba(102, 126, 234, 0.35);
+}
+
+.btn-glass.btn-icon.is-active:hover {
+    transform: translateY(0);
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.timeline-item:last-child {
+    border-bottom: 0;
+}
+
+.timeline-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    flex-shrink: 0;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+.timeline .status-badge {
+    margin-left: auto;
+}
+
+.chart-placeholder {
+    border: 1px dashed rgba(255, 255, 255, 0.25);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.footer-glass {
+    margin-top: 40px;
+    padding: 20px 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.06);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--body-text-color);
+    font-weight: 600;
+    letter-spacing: 0.4px;
+}
+
+.footer-brand i {
+    font-size: 20px;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.footer-links a {
+    color: var(--muted-text-color);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--body-text-color);
+}
+
+.footer-meta {
+    color: var(--muted-text-color);
+    font-size: 12px;
+}
 /* ========================================
    TABLE STYLES
 ======================================== */
@@ -837,3 +1142,10 @@ body[data-theme="aurora"] {
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.3);
 }
+
+
+
+
+
+
+

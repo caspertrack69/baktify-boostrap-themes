@@ -1,9 +1,47 @@
-/* ========================================
+﻿/* ========================================
    BAKTIFY BOOTSTRAP THEMES - MAIN SCRIPT
    Dashboard Interactivity & Components
 ======================================== */
 
 'use strict';
+
+// ========================================
+// COMPONENT LOADER
+// ========================================
+class ComponentLoader {
+    static async loadAll(maxDepth = 5) {
+        for (let depth = 0; depth < maxDepth; depth++) {
+            const targets = document.querySelectorAll('[data-include]');
+            if (!targets.length) {
+                break;
+            }
+
+            await Promise.all(
+                Array.from(targets).map(async (el) => {
+                    const src = el.getAttribute('data-include');
+                    if (!src) {
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch(src, { cache: 'no-cache' });
+                        if (!response.ok) {
+                            throw new Error(response.statusText);
+                        }
+
+                        const html = await response.text();
+                        const template = document.createElement('template');
+                        template.innerHTML = html.trim();
+                        const fragment = template.content.cloneNode(true);
+                        el.replaceWith(fragment);
+                    } catch (error) {
+                        console.error(`[ComponentLoader] Failed to load ${src}`, error);
+                    }
+                })
+            );
+        }
+    }
+}
 
 // ========================================
 // SIDEBAR TOGGLE
@@ -13,6 +51,9 @@ class SidebarController {
         this.sidebar = document.querySelector('.sidebar');
         this.toggleBtn = document.querySelector('.sidebar-toggle');
         this.overlay = document.querySelector('.sidebar-overlay');
+        this.activeRoute = document.body.dataset.page || '';
+        this.healthDisplay = this.sidebar ? this.sidebar.querySelector('[data-sidebar-health]') : null;
+        this.healthBar = this.sidebar ? this.sidebar.querySelector('.sidebar-progress .progress-bar') : null;
         
         this.init();
     }
@@ -32,6 +73,9 @@ class SidebarController {
                 this.close();
             }
         });
+
+        this.highlightActive();
+        this.updateWorkspaceHealth();
     }
     
     toggle() {
@@ -45,6 +89,36 @@ class SidebarController {
         this.sidebar.classList.remove('active');
         if (this.overlay) {
             this.overlay.classList.remove('active');
+        }
+    }
+
+    highlightActive() {
+        if (!this.sidebar || !this.activeRoute) {
+            return;
+        }
+
+        const links = this.sidebar.querySelectorAll('.sidebar-menu-link');
+        links.forEach(link => {
+            const route = link.dataset.route;
+            link.classList.toggle('active', route === this.activeRoute);
+        });
+    }
+
+    updateWorkspaceHealth() {
+        if (!this.healthDisplay) {
+            return;
+        }
+
+        const value = document.body.dataset.sidebarHealth;
+        if (!value) {
+            return;
+        }
+
+        this.healthDisplay.textContent = value;
+        if (this.healthBar) {
+            const numeric = parseInt(value, 10);
+            const width = Number.isFinite(numeric) ? Math.max(0, Math.min(100, numeric)) : 0;
+            this.healthBar.style.width = `${width}%`;
         }
     }
 }
@@ -116,6 +190,172 @@ class NotificationController {
         if (this.notificationDropdown) {
             this.notificationDropdown.classList.remove('active');
         }
+    }
+}
+
+// ========================================
+// NAVBAR CUSTOMISATION
+// ========================================
+class NavbarController {
+    constructor() {
+        this.navbar = document.querySelector('.navbar-custom');
+        if (!this.navbar) {
+            return;
+        }
+
+        this.searchInput = this.navbar.querySelector('[data-navbar-search]');
+        this.extraContainer = this.navbar.querySelector('[data-navbar-extra]');
+        this.notificationBadge = this.navbar.querySelector('[data-notification-count]');
+        this.notificationButton = this.navbar.querySelector('[data-notification-toggle]');
+        this.messageBadge = this.navbar.querySelector('[data-message-count]');
+        this.messageButton = this.navbar.querySelector('[data-messages-toggle]');
+        this.avatar = this.navbar.querySelector('[data-navbar-avatar]');
+        this.userName = this.navbar.querySelector('[data-navbar-name]');
+        this.userRole = this.navbar.querySelector('[data-navbar-role]');
+
+        this.applyConfig();
+    }
+
+    applyConfig() {
+        const body = document.body.dataset;
+
+        if (this.searchInput) {
+            const placeholder = body.searchPlaceholder || this.searchInput.getAttribute('placeholder');
+            this.searchInput.setAttribute('placeholder', placeholder);
+        }
+
+        if (this.notificationBadge) {
+            const count = Number(body.notificationCount ?? this.notificationBadge.textContent) || 0;
+            this.notificationBadge.textContent = count;
+            if (count <= 0 && this.notificationButton) {
+                this.notificationBadge.classList.add('d-none');
+            } else {
+                this.notificationBadge.classList.remove('d-none');
+            }
+            if (body.showNotifications === 'false' && this.notificationButton) {
+                this.notificationButton.style.display = 'none';
+            }
+        }
+
+        if (this.messageBadge && this.messageButton) {
+            const count = Number(body.messageCount ?? this.messageBadge.textContent) || 0;
+            this.messageBadge.textContent = count;
+            if (count <= 0) {
+                this.messageBadge.classList.add('d-none');
+            } else {
+                this.messageBadge.classList.remove('d-none');
+            }
+            if (body.showMessages === 'false') {
+                this.messageButton.style.display = 'none';
+            }
+        }
+
+        if (this.avatar && body.userAvatar) {
+            this.avatar.src = body.userAvatar;
+        }
+        if (this.userName && body.userName) {
+            this.userName.textContent = body.userName;
+        }
+        if (this.userRole && body.userRole) {
+            this.userRole.textContent = body.userRole;
+        }
+
+        if (this.extraContainer) {
+            const extras = this.buildExtraActions(body.navbarActions || '');
+            if (extras.length) {
+                extras.forEach(action => this.extraContainer.appendChild(action));
+            } else {
+                this.extraContainer.style.display = 'none';
+            }
+        }
+    }
+
+    buildExtraActions(actionKey) {
+        const actions = [];
+        switch (actionKey) {
+            case 'analytics':
+                actions.push(
+                    this.createButton({
+                        innerHTML: '<i class="bi bi-funnel me-1"></i>Segments',
+                        attributes: { id: 'btnAnalyticsSegments' }
+                    }),
+                    this.createButton({
+                        innerHTML: '<i class="bi bi-download me-1"></i>Export',
+                        attributes: { id: 'btnAnalyticsExport' }
+                    })
+                );
+                break;
+            case 'projects':
+                actions.push(
+                    this.createButton({
+                        innerHTML: '<i class="bi bi-plus-lg me-1"></i>New Project',
+                        attributes: { id: 'btnNavbarNewProject' }
+                    })
+                );
+                break;
+            case 'users':
+                actions.push(
+                    this.createButton({
+                        innerHTML: '<i class="bi bi-person-plus me-1"></i>Invite',
+                        attributes: { id: 'btnNavbarInvite' }
+                    })
+                );
+                break;
+            case 'reports':
+                actions.push(
+                    this.createButton({
+                        innerHTML: '<i class="bi bi-bar-chart me-1"></i>Generate',
+                        attributes: { id: 'btnNavbarGenerateReport' }
+                    }),
+                    this.createButton({
+                        innerHTML: '<i class="bi bi-file-earmark-pdf me-1"></i>Export PDF',
+                        attributes: { id: 'btnNavbarReportExport' }
+                    })
+                );
+                break;
+            case 'calendar':
+                actions.push(
+                    this.createButton({
+                        innerHTML: '<i class="bi bi-plus-lg me-1"></i>New Event',
+                        attributes: { id: 'btnNavbarNewEvent' }
+                    }),
+                    this.createButton({
+                        innerHTML: '<i class="bi bi-arrow-repeat me-1"></i>Sync',
+                        attributes: { id: 'btnNavbarSyncCalendar' }
+                    })
+                );
+                break;
+            case 'billing':
+                actions.push(
+                    this.createButton({
+                        innerHTML: '<i class="bi bi-receipt-cutoff me-1"></i>New Invoice',
+                        attributes: { id: 'btnNavbarInvoice' }
+                    })
+                );
+                break;
+            case 'support':
+                actions.push(
+                    this.createButton({
+                        innerHTML: '<i class="bi bi-life-preserver me-1"></i>New Ticket',
+                        attributes: { id: 'btnNavbarSupportTicket' }
+                    })
+                );
+                break;
+            default:
+                break;
+        }
+        return actions;
+    }
+
+    createButton({ innerHTML = '', className = 'btn-glass', attributes = {} }) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = className;
+        button.innerHTML = innerHTML;
+        Object.entries(attributes).forEach(([key, value]) => {
+            button.setAttribute(key, value);
+        });
+        return button;
     }
 }
 
@@ -366,7 +606,9 @@ const Utils = {
 // ========================================
 // INITIALIZE ALL COMPONENTS
 // ========================================
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    await ComponentLoader.loadAll();
+
     const themeController = new ThemeController();
     if (typeof window !== 'undefined') {
         window.baktifyTheme = themeController;
@@ -374,6 +616,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize all controllers
     new SidebarController();
+    new NavbarController();
     new SearchController();
     new NotificationController();
     new StatsAnimator();
@@ -384,11 +627,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add fade-in animation to cards
     const cards = document.querySelectorAll('.glass-card, .stat-card, .card-glass');
     cards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.1}s`;
+        card.style.animationDelay = `${index * 0.1}s`; 
         card.classList.add('fade-in-up');
     });
     
-    console.log('🎨 Baktify Dashboard Theme Loaded Successfully!');
+    console.log('Baktify Dashboard Theme Loaded Successfully!');
 });
 
 // ========================================
@@ -396,7 +639,9 @@ document.addEventListener('DOMContentLoaded', () => {
 // ========================================
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
+        ComponentLoader,
         SidebarController,
+        NavbarController,
         SearchController,
         NotificationController,
         StatsAnimator,
@@ -405,3 +650,6 @@ if (typeof module !== 'undefined' && module.exports) {
         Utils
     };
 }
+
+
+

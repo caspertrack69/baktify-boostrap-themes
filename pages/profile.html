@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,96 +7,14 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
 </head>
-<body>
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <a href="index.html" class="sidebar-logo">
-                <i class="bi bi-gem"></i>
-                <span>Baktify</span>
-            </a>
-        </div>
-        <ul class="sidebar-menu">
-            <li class="sidebar-menu-item">
-                <a href="index.html" class="sidebar-menu-link">
-                    <i class="bi bi-speedometer2"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li class="sidebar-menu-item">
-                <a href="analytics.html" class="sidebar-menu-link">
-                    <i class="bi bi-graph-up-arrow"></i>
-                    <span>Analytics</span>
-                </a>
-            </li>
-            <li class="sidebar-menu-item">
-                <a href="users.html" class="sidebar-menu-link">
-                    <i class="bi bi-people"></i>
-                    <span>Users</span>
-                </a>
-            </li>
-            <li class="sidebar-menu-item">
-                <a href="projects.html" class="sidebar-menu-link">
-                    <i class="bi bi-kanban"></i>
-                    <span>Projects</span>
-                </a>
-            </li>
-            <li class="sidebar-menu-item">
-                <a href="tables.html" class="sidebar-menu-link">
-                    <i class="bi bi-table"></i>
-                    <span>Tables</span>
-                </a>
-            </li>
-            <li class="sidebar-menu-item">
-                <a href="profile.html" class="sidebar-menu-link active">
-                    <i class="bi bi-person-circle"></i>
-                    <span>Profile</span>
-                </a>
-            </li>
-            <li class="sidebar-menu-item">
-                <a href="settings.html" class="sidebar-menu-link">
-                    <i class="bi bi-gear"></i>
-                    <span>Settings</span>
-                </a>
-            </li>
-        </ul>
-    </aside>
+<body data-page="profile" data-sidebar-health="91%" data-search-placeholder="Search profile..." data-notification-count="4" data-message-count="0" data-show-messages="false" data-user-name="John Doe" data-user-role="Administrator" data-user-avatar="https://ui-avatars.com/api/?name=John+Doe&background=667eea&color=fff">
+    <div data-include="../components/sidebar.html"></div>
+    <div data-include="../components/navbar.html"></div>
 
-    <!-- Navbar -->
-    <nav class="navbar-custom">
-        <button class="navbar-icon-btn sidebar-toggle d-lg-none">
-            <i class="bi bi-list"></i>
-        </button>
-        <div class="navbar-search">
-            <div class="search-wrapper">
-                <i class="bi bi-search search-icon"></i>
-                <input type="text" class="search-input" placeholder="Search profile...">
-            </div>
-        </div>
-        <div class="navbar-actions">
-            <button class="navbar-icon-btn" data-notification-toggle>
-                <i class="bi bi-bell"></i>
-                <span class="notification-badge">4</span>
-            </button>
-            <button class="navbar-icon-btn" data-theme-toggle aria-label="Switch theme">
-                <i class="bi bi-moon-stars"></i>
-            </button>
-            <span class="theme-pill d-none d-md-inline-flex" data-theme-label>Default Glow</span>
-            <div class="user-profile">
-                <img src="https://ui-avatars.com/api/?name=John+Doe&background=667eea&color=fff" alt="User" class="user-avatar">
-                <div class="user-info">
-                    <span class="user-name">John Doe</span>
-                    <span class="user-role">Administrator</span>
-                </div>
-                <i class="bi bi-chevron-down" style="color:#fff;font-size:14px;"></i>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
+<!-- Main Content -->
     <main class="main-content">
         <div class="page-header">
             <h1 class="page-title">Profile</h1>
@@ -174,7 +92,7 @@
                 <form class="row g-3">
                     <div class="col-md-6">
                         <label class="form-label text-white-75">Current Password</label>
-                        <input type="password" class="form-control" placeholder="••••••••" style="background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.25); color:#fff;">
+                        <input type="password" class="form-control" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" style="background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.25); color:#fff;">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label text-white-75">New Password</label>
@@ -218,9 +136,21 @@
         </div>
     </main>
 
+    <!-- Footer -->
+    <div data-include="../components/footer.html"></div>
+
     <div class="sidebar-overlay"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/script.js"></script>
+    <script src="../assets/js/script.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+

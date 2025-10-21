@@ -1,28 +1,36 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light glassmorphism">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Baktify</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+<nav class="navbar-custom" data-component="navbar">
+    <button class="navbar-icon-btn sidebar-toggle d-lg-none" aria-label="Toggle sidebar">
+        <i class="bi bi-list"></i>
+    </button>
+
+    <div class="navbar-search">
+        <div class="search-wrapper">
+            <i class="bi bi-search search-icon"></i>
+            <input type="text" class="search-input" data-navbar-search placeholder="Search anything..." />
+        </div>
+    </div>
+
+    <div class="navbar-actions">
+        <div class="navbar-extra-actions" data-navbar-extra></div>
+        <button class="navbar-icon-btn" data-notification-toggle aria-label="Notifications">
+            <i class="bi bi-bell"></i>
+            <span class="notification-badge" data-notification-count>3</span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Analytics</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Users</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Settings</a>
-                </li>
-            </ul>
-            <form class="d-flex ms-3">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+        <button class="navbar-icon-btn" data-messages-toggle aria-label="Messages">
+            <i class="bi bi-envelope"></i>
+            <span class="notification-badge" data-message-count>5</span>
+        </button>
+        <button class="navbar-icon-btn" data-theme-toggle aria-label="Switch theme">
+            <i class="bi bi-moon-stars"></i>
+        </button>
+        <span class="theme-pill d-none d-md-inline-flex" data-theme-label>Default Glow</span>
+        <div class="user-profile">
+            <img src="https://ui-avatars.com/api/?name=John+Doe&background=667eea&color=fff" alt="User" class="user-avatar" data-navbar-avatar />
+            <div class="user-info">
+                <span class="user-name" data-navbar-name>John Doe</span>
+                <span class="user-role" data-navbar-role>Administrator</span>
+            </div>
+            <i class="bi bi-chevron-down" style="color:#fff;font-size:14px;"></i>
         </div>
     </div>
 </nav>
