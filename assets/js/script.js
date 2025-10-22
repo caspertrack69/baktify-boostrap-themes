@@ -517,6 +517,447 @@ class ChartManager {
 }
 
 // ========================================
+// ACTION SUITE CONTROLLER
+// ========================================
+class ActionSuiteController {
+    constructor() {
+        this.root = document.querySelector('[data-component="action-suite"]');
+        if (!this.root) {
+            return;
+        }
+
+        this.loader = document.getElementById('actionLoader');
+        this.loaderMessage = this.loader ? this.loader.querySelector('.glass-loader-content p') : null;
+        this.loaderDefaultMessage = this.loaderMessage ? this.loaderMessage.textContent : 'Processing your request...';
+        this.feedback = this.root.querySelector('[data-action-feedback]');
+        this.feedbackText = this.root.querySelector('[data-action-feedback-text]');
+        this.contextLabel = this.root.querySelector('[data-action-context-label]');
+        this.description = this.root.querySelector('.action-suite-description');
+        this.progressBar = this.root.querySelector('[data-action-progress]');
+        this.progressLabel = this.root.querySelector('[data-action-progress-label]');
+        this.lastExport = this.root.querySelector('[data-action-last-export]');
+        this.downloadButton = this.root.querySelector('[data-action="start-download"]');
+        this.loaderTriggers = this.root.querySelectorAll('[data-action="show-loader"]');
+        this.downloadOptions = this.root.querySelectorAll('[data-action="download"]');
+        this.forms = this.root.querySelectorAll('.action-form');
+        this.filterReset = this.root.querySelector('[data-action="reset-filters"]');
+        this.deleteButton = this.root.querySelector('[data-action="confirm-delete"]');
+        this.dismissFeedbackBtn = this.root.querySelector('[data-action="dismiss-feedback"]');
+        this.filterSearch = this.root.querySelector('[data-action="filter-search"]');
+
+        this.feedbackTimer = null;
+        this.downloadTimer = null;
+        this.downloading = false;
+
+        this.init();
+    }
+
+    init() {
+        this.updateContextCopy();
+        this.bindLoaderTriggers();
+        this.bindDownloadActions();
+        this.bindForms();
+        this.bindFilterControls();
+        this.bindDeleteAction();
+        this.bindFeedbackDismiss();
+        this.bindSearch();
+    }
+
+    updateContextCopy() {
+        if (!this.contextLabel) {
+            return;
+        }
+
+        const slug = document.body.dataset.page || '';
+        const contexts = {
+            dashboard: {
+                title: 'Dashboard',
+                description: 'Monitor high level metrics and act without leaving the overview.'
+            },
+            analytics: {
+                title: 'Analytics',
+                description: 'Slice your data, compare trends, and export insights on demand.'
+            },
+            billing: {
+                title: 'Billing',
+                description: 'Manage invoices, reconcile payments, and keep accounts current.'
+            },
+            calendar: {
+                title: 'Calendar',
+                description: 'Coordinate schedules, sync events, and stay ahead of deadlines.'
+            },
+            profile: {
+                title: 'Profile',
+                description: 'Update account details, security preferences, and personal settings.'
+            },
+            projects: {
+                title: 'Projects',
+                description: 'Plan, assign, and deliver initiatives with confidence.'
+            },
+            reports: {
+                title: 'Reports',
+                description: 'Generate detailed reports, share insights, and keep stakeholders informed.'
+            },
+            settings: {
+                title: 'Settings',
+                description: 'Configure workspace defaults, automate routines, and govern access.'
+            },
+            support: {
+                title: 'Support',
+                description: 'Respond to tickets, track service levels, and close feedback loops faster.'
+            },
+            tables: {
+                title: 'Tables',
+                description: 'Inspect datasets, apply filters, and manage records in bulk.'
+            },
+            users: {
+                title: 'Users',
+                description: 'Onboard teammates, adjust permissions, and oversee account health.'
+            }
+        };
+
+        const entry = contexts[slug] || {
+            title: this.toTitleCase(slug || 'workspace'),
+            description: 'Manage records and keep your workspace aligned.'
+        };
+
+        this.contextLabel.textContent = `${entry.title} Actions`;
+        if (this.description) {
+            this.description.textContent = entry.description;
+        }
+    }
+
+    bindLoaderTriggers() {
+        if (!this.loaderTriggers.length) {
+            return;
+        }
+
+        this.loaderTriggers.forEach((trigger) => {
+            trigger.addEventListener('click', () => {
+                const message = this.createLoaderMessage(trigger);
+                this.toggleLoader(true, trigger, message);
+
+                window.setTimeout(() => {
+                    this.toggleLoader(false, trigger);
+                    this.showFeedback('Sync completed successfully.');
+                }, 1600);
+            });
+        });
+    }
+
+    bindDownloadActions() {
+        if (this.downloadButton) {
+            this.downloadButton.addEventListener('click', () => this.startDownload());
+        }
+
+        if (this.downloadOptions.length) {
+            this.downloadOptions.forEach((option) => {
+                option.addEventListener('click', () => {
+                    const type = option.dataset.downloadType || 'file';
+                    this.startDownload(type);
+                });
+            });
+        }
+    }
+
+    startDownload(type = 'custom') {
+        if (this.downloading) {
+            return;
+        }
+
+        this.downloading = true;
+        const label = this.toTitleCase(type);
+
+        if (this.progressLabel) {
+            this.progressLabel.textContent = `Preparing ${label} export...`;
+        }
+
+        if (this.downloadButton) {
+            this.toggleTriggerState(this.downloadButton, true, 'Generating...');
+        }
+
+        if (this.progressBar) {
+            this.progressBar.style.width = '0%';
+            this.progressBar.setAttribute('aria-valuenow', '0');
+        }
+
+        if (this.downloadTimer) {
+            clearInterval(this.downloadTimer);
+        }
+
+        const checkpoints = [12, 38, 66, 85, 100];
+        this.downloadTimer = window.setInterval(() => {
+            if (!checkpoints.length) {
+                window.clearInterval(this.downloadTimer);
+                this.downloadTimer = null;
+                this.finishDownload(label);
+                return;
+            }
+
+            const value = checkpoints.shift();
+            this.updateProgress(value);
+        }, 420);
+    }
+
+    updateProgress(value) {
+        if (this.progressBar) {
+            this.progressBar.style.width = `${value}%`;
+            this.progressBar.setAttribute('aria-valuenow', String(value));
+        }
+
+        if (this.progressLabel) {
+            if (value >= 100) {
+                this.progressLabel.textContent = 'Export ready to download.';
+            } else {
+                this.progressLabel.textContent = `Exporting data... ${value}%`;
+            }
+        }
+    }
+
+    finishDownload(label) {
+        this.updateProgress(100);
+
+        if (this.lastExport) {
+            this.lastExport.textContent = Utils.formatDate(new Date(), 'medium');
+        }
+
+        if (this.downloadButton) {
+            this.toggleTriggerState(this.downloadButton, false);
+        }
+
+        this.downloading = false;
+        this.showFeedback(`${label} export completed successfully.`);
+    }
+
+    bindForms() {
+        if (!this.forms.length) {
+            return;
+        }
+
+        this.forms.forEach((form) => {
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const submitButton = form.querySelector('[type="submit"]');
+                const actionType = form.dataset.actionForm || 'action';
+                const loaderMessage = this.getLoaderMessageForAction(actionType);
+
+                this.toggleLoader(true, submitButton, loaderMessage);
+
+                window.setTimeout(() => {
+                    this.toggleLoader(false, submitButton);
+                    const layer = form.closest('.modal, .offcanvas');
+                    this.closeLayer(layer);
+                    form.reset();
+                    this.showFeedback(this.buildFeedbackMessage(actionType));
+                }, 1400);
+            });
+        });
+    }
+
+    bindFilterControls() {
+        if (this.filterReset) {
+            this.filterReset.addEventListener('click', () => {
+                const form = this.filterReset.closest('form');
+                if (form) {
+                    form.reset();
+                }
+
+                this.showFeedback('Filters reset to default.');
+            });
+        }
+    }
+
+    bindDeleteAction() {
+        if (!this.deleteButton) {
+            return;
+        }
+
+        this.deleteButton.addEventListener('click', () => {
+            this.toggleLoader(true, this.deleteButton, 'Deleting record...');
+
+            window.setTimeout(() => {
+                this.toggleLoader(false, this.deleteButton);
+                this.closeLayer(document.getElementById('actionDeleteModal'));
+                this.showFeedback('Record deleted. It will remain in archive for 30 days.');
+            }, 1400);
+        });
+    }
+
+    bindFeedbackDismiss() {
+        if (!this.dismissFeedbackBtn || !this.feedback) {
+            return;
+        }
+
+        this.dismissFeedbackBtn.addEventListener('click', () => this.hideFeedback());
+    }
+
+    bindSearch() {
+        if (!this.filterSearch) {
+            return;
+        }
+
+        const debounced = Utils.debounce((value) => {
+            if (!value) {
+                this.hideFeedback();
+                return;
+            }
+
+            this.showFeedback(`Filtering results for "${value}"`);
+        }, 500);
+
+        this.filterSearch.addEventListener('input', (event) => {
+            debounced(event.target.value.trim());
+        });
+    }
+
+    toggleLoader(show, trigger = null, message = null) {
+        if (!this.loader) {
+            if (trigger) {
+                this.toggleTriggerState(trigger, show);
+            }
+            return;
+        }
+
+        if (show) {
+            this.loader.classList.add('is-visible');
+            this.loader.setAttribute('aria-hidden', 'false');
+            if (this.loaderMessage) {
+                this.loaderMessage.textContent = message || this.loaderDefaultMessage;
+            }
+        } else {
+            this.loader.classList.remove('is-visible');
+            this.loader.setAttribute('aria-hidden', 'true');
+            if (this.loaderMessage) {
+                this.loaderMessage.textContent = this.loaderDefaultMessage;
+            }
+        }
+
+        if (trigger) {
+            const spinnerLabel = message ? message.replace(/\.$/, '') : 'Working...';
+            this.toggleTriggerState(trigger, show, spinnerLabel);
+        }
+    }
+
+    toggleTriggerState(trigger, isLoading, loadingLabel = 'Working...') {
+        if (!trigger) {
+            return;
+        }
+
+        if (isLoading) {
+            if (!trigger.dataset.originalLabel) {
+                trigger.dataset.originalLabel = trigger.innerHTML;
+            }
+
+            trigger.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>${loadingLabel}`;
+            trigger.classList.add('is-loading');
+            trigger.disabled = true;
+        } else {
+            const original = trigger.dataset.originalLabel;
+            if (original) {
+                trigger.innerHTML = original;
+                delete trigger.dataset.originalLabel;
+            }
+
+            trigger.classList.remove('is-loading');
+            trigger.disabled = false;
+        }
+    }
+
+    closeLayer(element) {
+        if (!element) {
+            return;
+        }
+
+        if (element.classList.contains('modal')) {
+            if (typeof bootstrap !== 'undefined') {
+                const modalInstance = bootstrap.Modal.getOrCreateInstance(element);
+                modalInstance.hide();
+            }
+            return;
+        }
+
+        if (element.classList.contains('offcanvas')) {
+            if (typeof bootstrap !== 'undefined') {
+                const offcanvasInstance = bootstrap.Offcanvas.getOrCreateInstance(element);
+                offcanvasInstance.hide();
+            }
+        }
+    }
+
+    showFeedback(message) {
+        if (!this.feedback || !this.feedbackText) {
+            return;
+        }
+
+        this.feedbackText.textContent = message;
+        this.feedback.hidden = false;
+
+        if (this.feedbackTimer) {
+            window.clearTimeout(this.feedbackTimer);
+        }
+
+        this.feedbackTimer = window.setTimeout(() => this.hideFeedback(), 4200);
+    }
+
+    hideFeedback() {
+        if (!this.feedback) {
+            return;
+        }
+
+        this.feedback.hidden = true;
+    }
+
+    getLoaderMessageForAction(action) {
+        const messages = {
+            create: 'Saving new record...',
+            edit: 'Updating record...',
+            notes: 'Saving note...',
+            filters: 'Applying filters...'
+        };
+
+        return messages[action] || this.loaderDefaultMessage;
+    }
+
+    buildFeedbackMessage(action) {
+        const messages = {
+            create: 'New record created successfully.',
+            edit: 'Changes saved successfully.',
+            notes: 'Note stored and shared with your team.',
+            filters: 'Filters applied successfully.',
+            action: 'Action completed successfully.'
+        };
+
+        return messages[action] || messages.action;
+    }
+
+    createLoaderMessage(trigger) {
+        if (!trigger) {
+            return this.loaderDefaultMessage;
+        }
+
+        const explicit = trigger.dataset.loaderLabel;
+        if (explicit) {
+            return explicit;
+        }
+
+        const label = trigger.textContent.replace(/\s+/g, ' ').trim();
+        if (!label) {
+            return this.loaderDefaultMessage;
+        }
+
+        return `${label} in progress...`;
+    }
+
+    toTitleCase(value) {
+        return String(value)
+            .replace(/[-_]+/g, ' ')
+            .replace(/\b\w/g, (char) => char.toUpperCase())
+            .trim();
+    }
+}
+
+// ========================================
 // SMOOTH SCROLL
 // ========================================
 class SmoothScroll {
@@ -621,11 +1062,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     new NotificationController();
     new StatsAnimator();
     new ChartManager();
+    new ActionSuiteController();
     new SmoothScroll();
     new TooltipManager();
     
     // Add fade-in animation to cards
-    const cards = document.querySelectorAll('.glass-card, .stat-card, .card-glass');
+    const cards = document.querySelectorAll('.glass-card, .stat-card, .card-glass, .glass-panel');
     cards.forEach((card, index) => {
         card.style.animationDelay = `${index * 0.1}s`; 
         card.classList.add('fade-in-up');
@@ -647,6 +1089,7 @@ if (typeof module !== 'undefined' && module.exports) {
         StatsAnimator,
         ThemeController,
         ChartManager,
+        ActionSuiteController,
         Utils
     };
 }

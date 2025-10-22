@@ -1,0 +1,451 @@
+<section class="action-suite" data-component="action-suite">
+    <div class="glass-panel action-toolbar">
+        <div class="action-toolbar-header">
+            <div class="action-toolbar-heading">
+                <span class="action-suite-kicker">Workflow</span>
+                <h2 class="action-suite-title">
+                    <i class="bi bi-lightning-charge me-2"></i>
+                    <span data-action-context-label>Module Actions</span>
+                </h2>
+                <p class="action-suite-description">
+                    Manage create, update, delete, and export tasks with a consistent glassmorphism interface.
+                </p>
+            </div>
+            <div class="action-toolbar-search">
+                <div class="input-group glass-input">
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <input type="search" class="form-control glass-field" placeholder="Search within this module..." data-action="filter-search">
+                </div>
+                <button class="btn-glass btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#actionFilterPanel" aria-controls="actionFilterPanel">
+                    <i class="bi bi-funnel me-1"></i>
+                    Filters
+                </button>
+            </div>
+        </div>
+
+        <div class="action-toolbar-actions">
+            <div class="action-toolbar-primary">
+                <button class="btn-glass" type="button" data-bs-toggle="modal" data-bs-target="#actionCreateModal">
+                    <i class="bi bi-plus-lg me-1"></i>
+                    Create
+                </button>
+                <button class="btn-glass" type="button" data-bs-toggle="modal" data-bs-target="#actionEditModal">
+                    <i class="bi bi-pencil-square me-1"></i>
+                    Edit
+                </button>
+                <button class="btn-glass text-danger" type="button" data-bs-toggle="modal" data-bs-target="#actionDeleteModal">
+                    <i class="bi bi-trash me-1"></i>
+                    Delete
+                </button>
+            </div>
+            <div class="action-toolbar-secondary">
+                <div class="btn-group">
+                    <button class="btn-glass dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-download me-1"></i>
+                        Download
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end glass-dropdown">
+                        <li>
+                            <button class="dropdown-item" type="button" data-action="download" data-download-type="csv">
+                                <i class="bi bi-filetype-csv me-2"></i>
+                                Export as CSV
+                            </button>
+                        </li>
+                        <li>
+                            <button class="dropdown-item" type="button" data-action="download" data-download-type="xlsx">
+                                <i class="bi bi-filetype-xlsx me-2"></i>
+                                Export as Excel
+                            </button>
+                        </li>
+                        <li>
+                            <button class="dropdown-item" type="button" data-action="download" data-download-type="pdf">
+                                <i class="bi bi-file-earmark-pdf me-2"></i>
+                                Export as PDF
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <button class="btn-glass" type="button" data-action="show-loader">
+                    <i class="bi bi-arrow-repeat me-1"></i>
+                    Sync
+                </button>
+                <button class="btn-glass btn-icon" type="button" data-bs-toggle="offcanvas" data-bs-target="#actionHelpPanel" aria-controls="actionHelpPanel">
+                    <i class="bi bi-question-circle"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="action-secondary-grid">
+        <article class="glass-panel action-download-card">
+            <div class="action-download-header">
+                <div>
+                    <h3 class="action-download-title">Download Center</h3>
+                    <p class="action-download-description">Generate and track exports with animated progress feedback.</p>
+                </div>
+                <button class="btn-glass btn-sm" type="button" data-action="start-download">
+                    <i class="bi bi-play-circle me-1"></i>
+                    Start
+                </button>
+            </div>
+            <div class="action-download-progress">
+                <div class="progress glass-progress">
+                    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-action-progress></div>
+                </div>
+                <span class="progress-label" data-action-progress-label>Waiting to start...</span>
+            </div>
+            <ul class="download-meta">
+                <li>
+                    <i class="bi bi-clock me-2"></i>
+                    Last export
+                    <span data-action-last-export>—</span>
+                </li>
+                <li>
+                    <i class="bi bi-hdd-network me-2"></i>
+                    Destination
+                    <span class="text-gradient">Secure Cloud</span>
+                </li>
+            </ul>
+        </article>
+
+        <aside class="glass-panel action-help-card">
+            <div class="action-help-header">
+                <h3 class="action-help-title">Need a hand?</h3>
+                <p class="action-help-description">Access contextual guidance, shortcuts, and quick utilities.</p>
+            </div>
+            <div class="action-help-content">
+                <button class="btn-glass btn-sm w-100" type="button" data-bs-toggle="modal" data-bs-target="#actionShortcutsModal">
+                    <i class="bi bi-command me-1"></i>
+                    Keyboard Shortcuts
+                </button>
+                <button class="btn-glass btn-sm w-100" type="button" data-action="show-loader">
+                    <i class="bi bi-lightning me-1"></i>
+                    Launch Guided Flow
+                </button>
+                <button class="btn-glass btn-sm w-100" type="button" data-bs-toggle="modal" data-bs-target="#actionNotesModal">
+                    <i class="bi bi-sticky me-1"></i>
+                    Quick Notes
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <div class="action-feedback glass-panel" data-action-feedback hidden>
+        <div class="action-feedback-body">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            <span data-action-feedback-text>Action completed successfully.</span>
+        </div>
+        <button class="btn-close btn-close-white" type="button" aria-label="Dismiss" data-action="dismiss-feedback"></button>
+    </div>
+
+    <!-- Create Modal -->
+    <div class="modal fade glass-modal" id="actionCreateModal" tabindex="-1" aria-labelledby="actionCreateModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="actionCreateModalLabel">
+                        <i class="bi bi-plus-circle me-2"></i>
+                        Create Record
+                    </h5>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="action-form" data-action-form="create">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label" for="actionCreateName">Name</label>
+                                <input class="form-control glass-field" id="actionCreateName" type="text" placeholder="Enter name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="actionCreateEmail">Email</label>
+                                <input class="form-control glass-field" id="actionCreateEmail" type="email" placeholder="Enter email">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="actionCreateRole">Role</label>
+                                <select class="form-select glass-field" id="actionCreateRole" required>
+                                    <option value="">Choose role</option>
+                                    <option>Administrator</option>
+                                    <option>Manager</option>
+                                    <option>Contributor</option>
+                                    <option>Viewer</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="actionCreateStatus">Status</label>
+                                <select class="form-select glass-field" id="actionCreateStatus">
+                                    <option>Active</option>
+                                    <option>Pending</option>
+                                    <option>Disabled</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label" for="actionCreateNotes">Notes</label>
+                                <textarea class="form-control glass-field" id="actionCreateNotes" rows="3" placeholder="Add internal notes"></textarea>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mt-4">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" id="actionCreateNotify" type="checkbox" checked>
+                                <label class="form-check-label" for="actionCreateNotify">Send welcome email</label>
+                            </div>
+                            <button class="btn-glass" type="submit">
+                                <i class="bi bi-save me-1"></i>
+                                Save Record
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade glass-modal" id="actionEditModal" tabindex="-1" aria-labelledby="actionEditModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="actionEditModalLabel">
+                        <i class="bi bi-pencil-square me-2"></i>
+                        Edit Record
+                    </h5>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="action-form" data-action-form="edit">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label" for="actionEditName">Name</label>
+                                <input class="form-control glass-field" id="actionEditName" type="text" placeholder="Update name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="actionEditEmail">Email</label>
+                                <input class="form-control glass-field" id="actionEditEmail" type="email" placeholder="Update email">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="actionEditAccess">Access Level</label>
+                                <select class="form-select glass-field" id="actionEditAccess">
+                                    <option>Read &amp; Write</option>
+                                    <option>Read Only</option>
+                                    <option>Custom</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="actionEditTeam">Team</label>
+                                <input class="form-control glass-field" id="actionEditTeam" type="text" placeholder="Product, Finance, ...">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="actionEditDate">Review Date</label>
+                                <input class="form-control glass-field" id="actionEditDate" type="date">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label" for="actionEditSummary">Summary</label>
+                                <textarea class="form-control glass-field" id="actionEditSummary" rows="3" placeholder="Summarize recent updates"></textarea>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mt-4">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" id="actionEditNotify" type="checkbox">
+                                <label class="form-check-label" for="actionEditNotify">Notify collaborators</label>
+                            </div>
+                            <button class="btn-glass" type="submit">
+                                <i class="bi bi-save2 me-1"></i>
+                                Update Record
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="modal fade glass-modal" id="actionDeleteModal" tabindex="-1" aria-labelledby="actionDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="actionDeleteModalLabel">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        Confirm Delete
+                    </h5>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-3">This action cannot be undone. Please confirm you want to remove the selected record.</p>
+                    <div class="alert alert-warning glass-alert" role="alert">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Associated data will be archived for 30 days.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-glass" type="button" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn-glass text-danger" type="button" data-action="confirm-delete">
+                        <i class="bi bi-trash"></i>
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Keyboard Shortcuts Modal -->
+    <div class="modal fade glass-modal" id="actionShortcutsModal" tabindex="-1" aria-labelledby="actionShortcutsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="actionShortcutsModalLabel">
+                        <i class="bi bi-command me-2"></i>
+                        Keyboard Shortcuts
+                    </h5>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="shortcut-list">
+                        <li>
+                            <span><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>N</kbd></span>
+                            <span>Create new record</span>
+                        </li>
+                        <li>
+                            <span><kbd>Ctrl</kbd> + <kbd>Enter</kbd></span>
+                            <span>Save changes</span>
+                        </li>
+                        <li>
+                            <span><kbd>Ctrl</kbd> + <kbd>Del</kbd></span>
+                            <span>Archive selection</span>
+                        </li>
+                        <li>
+                            <span><kbd>?</kbd></span>
+                            <span>Open contextual help</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notes Modal -->
+    <div class="modal fade glass-modal" id="actionNotesModal" tabindex="-1" aria-labelledby="actionNotesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="actionNotesModalLabel">
+                        <i class="bi bi-sticky me-2"></i>
+                        Quick Notes
+                    </h5>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="action-form" data-action-form="notes">
+                        <div class="mb-3">
+                            <label class="form-label" for="actionNoteCategory">Category</label>
+                            <select class="form-select glass-field" id="actionNoteCategory">
+                                <option>Follow-up</option>
+                                <option>Risk</option>
+                                <option>Idea</option>
+                                <option>Customer Feedback</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="actionNoteContent">Note</label>
+                            <textarea class="form-control glass-field" id="actionNoteContent" rows="4" placeholder="Capture quick notes for your team"></textarea>
+                        </div>
+                        <button class="btn-glass w-100" type="submit">
+                            <i class="bi bi-journal-check me-1"></i>
+                            Save Note
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters Offcanvas -->
+    <div class="offcanvas offcanvas-end glass-offcanvas" tabindex="-1" id="actionFilterPanel" aria-labelledby="actionFilterPanelLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="actionFilterPanelLabel">
+                <i class="bi bi-funnel me-2"></i>
+                Advanced Filters
+            </h5>
+            <button class="btn-close text-reset" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <form class="action-form" data-action-form="filters">
+                <div class="mb-3">
+                    <label class="form-label" for="actionFilterStatus">Status</label>
+                    <select class="form-select glass-field" id="actionFilterStatus">
+                        <option value="">Any status</option>
+                        <option>Active</option>
+                        <option>Pending</option>
+                        <option>Archived</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="actionFilterOwner">Owner</label>
+                    <input class="form-control glass-field" id="actionFilterOwner" type="text" placeholder="Search by owner">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="actionFilterDate">Updated within</label>
+                    <select class="form-select glass-field" id="actionFilterDate">
+                        <option value="">Any time</option>
+                        <option>Last 7 days</option>
+                        <option>Last 30 days</option>
+                        <option>This quarter</option>
+                    </select>
+                </div>
+                <div class="d-flex gap-2 mt-4">
+                    <button class="btn-glass flex-fill" type="button" data-action="reset-filters">Reset</button>
+                    <button class="btn-glass flex-fill" type="submit">Apply</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Help Offcanvas -->
+    <div class="offcanvas offcanvas-end glass-offcanvas" tabindex="-1" id="actionHelpPanel" aria-labelledby="actionHelpPanelLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="actionHelpPanelLabel">
+                <i class="bi bi-question-circle me-2"></i>
+                Contextual Help
+            </h5>
+            <button class="btn-close text-reset" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="action-help-panel">
+                <p class="text-muted mb-3">Review the latest tips to optimize your workflow.</p>
+                <ul class="help-panel-list">
+                    <li>
+                        <i class="bi bi-lightbulb"></i>
+                        <div>
+                            <p class="help-panel-title">Automate repetitive updates</p>
+                            <p class="help-panel-text">Leverage automation rules to keep records aligned without manual effort.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="bi bi-people"></i>
+                        <div>
+                            <p class="help-panel-title">Collaborate in real time</p>
+                            <p class="help-panel-text">Use shared notes to keep teams aligned on priorities and blockers.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="bi bi-shield-check"></i>
+                        <div>
+                            <p class="help-panel-title">Maintain compliance</p>
+                            <p class="help-panel-text">Track audits and approvals to ensure governance at scale.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Loader -->
+    <div class="glass-loader" id="actionLoader" aria-hidden="true">
+        <div class="glass-loader-backdrop"></div>
+        <div class="glass-loader-content">
+            <div class="spinner-border text-light" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mb-0 mt-3">Processing your request...</p>
+        </div>
+    </div>
+</section>

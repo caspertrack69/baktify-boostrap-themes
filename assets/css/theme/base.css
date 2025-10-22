@@ -1,0 +1,151 @@
+/* ========================================
+   BAKTIFY THEME • BASE FOUNDATION
+======================================== */
+
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: rgba(0, 0, 0, 0.1);
+    --background-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    --body-overlay: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    --body-text-color: rgba(255, 255, 255, 0.92);
+    --muted-text-color: rgba(255, 255, 255, 0.75);
+    --sidebar-bg: rgba(255, 255, 255, 0.08);
+    --sidebar-border: rgba(255, 255, 255, 0.2);
+    --sidebar-divider: rgba(255, 255, 255, 0.15);
+    --sidebar-shadow: 4px 0 24px rgba(0, 0, 0, 0.1);
+    --navbar-bg: rgba(255, 255, 255, 0.1);
+    --navbar-border: rgba(255, 255, 255, 0.2);
+    --navbar-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+    --card-surface: rgba(255, 255, 255, 0.15);
+    --card-border: rgba(255, 255, 255, 0.25);
+    --card-shadow: rgba(31, 38, 135, 0.15);
+    --card-shadow-hover: rgba(31, 38, 135, 0.25);
+    --card-hover-border: rgba(255, 255, 255, 0.35);
+    --stat-surface: rgba(255, 255, 255, 0.12);
+    --stat-border: rgba(255, 255, 255, 0.25);
+    --stat-shadow: rgba(0, 0, 0, 0.15);
+    --stat-shadow-hover: rgba(0, 0, 0, 0.2);
+    --button-glass-bg: rgba(255, 255, 255, 0.18);
+    --button-glass-border: rgba(255, 255, 255, 0.35);
+    --button-glass-hover: rgba(255, 255, 255, 0.28);
+    --table-head-bg: rgba(255, 255, 255, 0.1);
+    --table-border-color: rgba(255, 255, 255, 0.2);
+    --table-row-border: rgba(255, 255, 255, 0.1);
+    --table-row-hover: rgba(255, 255, 255, 0.08);
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --sidebar-width: 260px;
+    --navbar-height: 70px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--background-gradient);
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: var(--body-text-color);
+    overflow-x: hidden;
+}
+
+.text-white-75 {
+    color: var(--muted-text-color) !important;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--body-overlay);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ========================================
+   THEME VARIANTS
+======================================== */
+
+body[data-theme="dark"] {
+    --background-gradient: linear-gradient(135deg, #0f172a 0%, #1f2937 45%, #312e81 100%);
+    --body-overlay: radial-gradient(circle at 15% 20%, rgba(59, 130, 246, 0.18) 0%, transparent 45%), radial-gradient(circle at 80% 75%, rgba(56, 189, 248, 0.15) 0%, transparent 55%);
+    --body-text-color: rgba(226, 232, 240, 0.94);
+    --muted-text-color: rgba(148, 163, 184, 0.82);
+    --glass-bg: rgba(17, 24, 39, 0.75);
+    --glass-border: rgba(148, 163, 184, 0.25);
+    --glass-shadow: rgba(8, 12, 24, 0.6);
+    --sidebar-bg: rgba(15, 23, 42, 0.75);
+    --sidebar-border: rgba(94, 96, 122, 0.35);
+    --sidebar-divider: rgba(94, 96, 122, 0.35);
+    --sidebar-shadow: 4px 0 32px rgba(8, 12, 24, 0.55);
+    --navbar-bg: rgba(15, 23, 42, 0.68);
+    --navbar-border: rgba(94, 96, 122, 0.35);
+    --navbar-shadow: 0 12px 32px rgba(8, 12, 24, 0.55);
+    --card-surface: rgba(17, 24, 39, 0.72);
+    --card-border: rgba(148, 163, 184, 0.28);
+    --card-shadow: rgba(15, 23, 42, 0.48);
+    --card-shadow-hover: rgba(15, 23, 42, 0.62);
+    --card-hover-border: rgba(148, 163, 184, 0.45);
+    --stat-surface: rgba(17, 24, 39, 0.68);
+    --stat-border: rgba(148, 163, 184, 0.28);
+    --stat-shadow: rgba(15, 23, 42, 0.48);
+    --stat-shadow-hover: rgba(15, 23, 42, 0.6);
+    --button-glass-bg: rgba(79, 70, 229, 0.32);
+    --button-glass-border: rgba(129, 140, 248, 0.48);
+    --button-glass-hover: rgba(129, 140, 248, 0.38);
+    --table-head-bg: rgba(30, 41, 59, 0.8);
+    --table-border-color: rgba(148, 163, 184, 0.32);
+    --table-row-border: rgba(71, 85, 105, 0.45);
+    --table-row-hover: rgba(51, 65, 85, 0.4);
+    --primary-gradient: linear-gradient(135deg, #22d3ee 0%, #6366f1 100%);
+    --secondary-gradient: linear-gradient(135deg, #a855f7 0%, #f472b6 100%);
+    --success-gradient: linear-gradient(135deg, #22c55e 0%, #0ea5e9 100%);
+    --warning-gradient: linear-gradient(135deg, #f97316 0%, #facc15 100%);
+}
+
+body[data-theme="aurora"] {
+    --background-gradient: linear-gradient(135deg, #84fab0 0%, #8fd3f4 45%, #a6c0fe 100%);
+    --body-overlay: radial-gradient(circle at 10% 30%, rgba(255, 255, 255, 0.3) 0%, transparent 55%), radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.22) 0%, transparent 60%);
+    --body-text-color: rgba(255, 255, 255, 0.95);
+    --muted-text-color: rgba(255, 255, 255, 0.82);
+    --glass-bg: rgba(255, 255, 255, 0.28);
+    --glass-border: rgba(255, 255, 255, 0.45);
+    --glass-shadow: rgba(59, 130, 246, 0.28);
+    --sidebar-bg: rgba(255, 255, 255, 0.14);
+    --sidebar-border: rgba(255, 255, 255, 0.35);
+    --sidebar-divider: rgba(255, 255, 255, 0.35);
+    --sidebar-shadow: 4px 0 28px rgba(59, 130, 246, 0.28);
+    --navbar-bg: rgba(255, 255, 255, 0.18);
+    --navbar-border: rgba(255, 255, 255, 0.35);
+    --navbar-shadow: 0 14px 28px rgba(59, 130, 246, 0.25);
+    --card-surface: rgba(255, 255, 255, 0.24);
+    --card-border: rgba(255, 255, 255, 0.4);
+    --card-shadow: rgba(59, 130, 246, 0.22);
+    --card-shadow-hover: rgba(59, 130, 246, 0.32);
+    --card-hover-border: rgba(255, 255, 255, 0.6);
+    --stat-surface: rgba(255, 255, 255, 0.2);
+    --stat-border: rgba(255, 255, 255, 0.35);
+    --stat-shadow: rgba(59, 130, 246, 0.2);
+    --stat-shadow-hover: rgba(59, 130, 246, 0.28);
+    --button-glass-bg: rgba(255, 255, 255, 0.32);
+    --button-glass-border: rgba(255, 255, 255, 0.5);
+    --button-glass-hover: rgba(255, 255, 255, 0.42);
+    --table-head-bg: rgba(255, 255, 255, 0.28);
+    --table-border-color: rgba(255, 255, 255, 0.4);
+    --table-row-border: rgba(255, 255, 255, 0.3);
+    --table-row-hover: rgba(255, 255, 255, 0.22);
+    --primary-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    --secondary-gradient: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+    --success-gradient: linear-gradient(135deg, #96fbc4 0%, #f9f586 100%);
+    --warning-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+}
