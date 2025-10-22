@@ -44,14 +44,14 @@
         <!-- Stats Grid -->
         <div class="stats-grid">
             <!-- Stat Card 1 -->
-            <div class="stat-card">
+            <div class="stat-card" data-stat-card="revenue">
                 <div class="stat-header">
                     <div>
                         <h3 class="stat-title">Total Revenue</h3>
-                        <div class="stat-value">$45,231</div>
-                        <div class="stat-change positive">
-                            <i class="bi bi-arrow-up"></i>
-                            <span>+12.5% from last month</span>
+                        <div class="stat-value" data-stat-value="revenue">$45,231</div>
+                        <div class="stat-change positive" data-stat-change="revenue">
+                            <i class="bi bi-arrow-up" data-stat-trend="revenue"></i>
+                            <span data-stat-label="revenue">+12.5% from last month</span>
                         </div>
                     </div>
                     <div class="stat-icon primary">
@@ -61,14 +61,14 @@
             </div>
             
             <!-- Stat Card 2 -->
-            <div class="stat-card">
+            <div class="stat-card" data-stat-card="users">
                 <div class="stat-header">
                     <div>
                         <h3 class="stat-title">Total Users</h3>
-                        <div class="stat-value">12,456</div>
-                        <div class="stat-change positive">
-                            <i class="bi bi-arrow-up"></i>
-                            <span>+8.2% from last month</span>
+                        <div class="stat-value" data-stat-value="users">12,456</div>
+                        <div class="stat-change positive" data-stat-change="users">
+                            <i class="bi bi-arrow-up" data-stat-trend="users"></i>
+                            <span data-stat-label="users">+8.2% from last month</span>
                         </div>
                     </div>
                     <div class="stat-icon success">
@@ -78,14 +78,14 @@
             </div>
             
             <!-- Stat Card 3 -->
-            <div class="stat-card">
+            <div class="stat-card" data-stat-card="projects">
                 <div class="stat-header">
                     <div>
                         <h3 class="stat-title">Active Projects</h3>
-                        <div class="stat-value">234</div>
-                        <div class="stat-change positive">
-                            <i class="bi bi-arrow-up"></i>
-                            <span>+5.7% from last month</span>
+                        <div class="stat-value" data-stat-value="projects">234</div>
+                        <div class="stat-change positive" data-stat-change="projects">
+                            <i class="bi bi-arrow-up" data-stat-trend="projects"></i>
+                            <span data-stat-label="projects">+5.7% from last month</span>
                         </div>
                     </div>
                     <div class="stat-icon warning">
@@ -95,14 +95,14 @@
             </div>
             
             <!-- Stat Card 4 -->
-            <div class="stat-card">
+            <div class="stat-card" data-stat-card="tasks">
                 <div class="stat-header">
                     <div>
                         <h3 class="stat-title">Pending Tasks</h3>
-                        <div class="stat-value">89</div>
-                        <div class="stat-change negative">
-                            <i class="bi bi-arrow-down"></i>
-                            <span>-3.1% from last month</span>
+                        <div class="stat-value" data-stat-value="tasks">89</div>
+                        <div class="stat-change negative" data-stat-change="tasks">
+                            <i class="bi bi-arrow-down" data-stat-trend="tasks"></i>
+                            <span data-stat-label="tasks">-3.1% from last month</span>
                         </div>
                     </div>
                     <div class="stat-icon danger">
@@ -111,6 +111,124 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Strategy Studio -->
+        <section class="strategy-studio">
+            <div class="strategy-grid">
+                <article class="card-glass col-span-8 strategy-card">
+                    <div class="card-header-glass">
+                        <div>
+                            <h2 class="card-title-glass">
+                                <i class="bi bi-compass me-2"></i>
+                                Strategy Studio
+                            </h2>
+                            <p class="card-subtitle-glass">Simulate operating modes and see the ripple effect across your KPIs.</p>
+                        </div>
+                        <span class="strategy-badge" data-scenario-badge>Balanced Momentum</span>
+                    </div>
+                    <div class="strategy-options" role="tablist" aria-label="Scenario presets">
+                        <button class="strategy-option is-active" type="button" data-scenario="balanced">
+                            <div class="strategy-option-heading">
+                                <i class="bi bi-bullseye"></i>
+                                <span>Balanced Momentum</span>
+                            </div>
+                            <p>Steady 12% YoY growth with risk buffers intact.</p>
+                        </button>
+                        <button class="strategy-option" type="button" data-scenario="growth">
+                            <div class="strategy-option-heading">
+                                <i class="bi bi-rocket-takeoff"></i>
+                                <span>Aggressive Growth</span>
+                            </div>
+                            <p>Push demand generation and expansion initiatives.</p>
+                        </button>
+                        <button class="strategy-option" type="button" data-scenario="efficiency">
+                            <div class="strategy-option-heading">
+                                <i class="bi bi-cpu"></i>
+                                <span>Operational Excellence</span>
+                            </div>
+                            <p>Optimize margins and delivery speed simultaneously.</p>
+                        </button>
+                    </div>
+                    <div class="strategy-metrics">
+                        <div class="strategy-metric" data-metric="runway">
+                            <div class="strategy-metric-label">
+                                <span>Runway Confidence</span>
+                                <span class="strategy-metric-value" data-metric-value="runway">16 mo</span>
+                            </div>
+                            <div class="progress glass-progress">
+                                <div class="progress-bar" data-metric-progress="runway" style="width: 68%;"></div>
+                            </div>
+                        </div>
+                        <div class="strategy-metric" data-metric="activation">
+                            <div class="strategy-metric-label">
+                                <span>Activation Velocity</span>
+                                <span class="strategy-metric-value" data-metric-value="activation">+18%</span>
+                            </div>
+                            <div class="progress glass-progress">
+                                <div class="progress-bar" data-metric-progress="activation" style="width: 62%;"></div>
+                            </div>
+                        </div>
+                        <div class="strategy-metric" data-metric="efficiency">
+                            <div class="strategy-metric-label">
+                                <span>Margin Efficiency</span>
+                                <span class="strategy-metric-value" data-metric-value="efficiency">31%</span>
+                            </div>
+                            <div class="progress glass-progress">
+                                <div class="progress-bar" data-metric-progress="efficiency" style="width: 54%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="strategy-chart">
+                        <canvas id="strategyMomentumChart" height="220"></canvas>
+                    </div>
+                </article>
+                <aside class="card-glass col-span-4 insight-card">
+                    <div class="card-header-glass">
+                        <div>
+                            <h2 class="card-title-glass">
+                                <i class="bi bi-stars me-2"></i>
+                                Executive Insights
+                            </h2>
+                            <p class="card-subtitle-glass">Generated from scenario deltas.</p>
+                        </div>
+                        <button class="btn-glass btn-sm" type="button" data-insights-refresh>
+                            <i class="bi bi-arrow-clockwise me-1"></i>
+                            Refresh
+                        </button>
+                    </div>
+                    <div class="insight-body">
+                        <p class="insight-lead" data-insight-lead>Revenue holds steady while activation climbs.</p>
+                        <div class="insight-tags" data-insight-tags>
+                            <span class="insight-tag">Focus: Adoption</span>
+                            <span class="insight-tag">Risk: Ops Debt</span>
+                        </div>
+                        <ul class="insight-list">
+                            <li data-insight-item="0">
+                                <span class="insight-chip">Action</span>
+                                <p data-insight-text="0">Stand up a cross-functional growth pod to shorten activation from 14 to 9 days.</p>
+                            </li>
+                            <li data-insight-item="1">
+                                <span class="insight-chip">Guardrail</span>
+                                <p data-insight-text="1">Expand observability coverage to maintain 98% incident response SLA.</p>
+                            </li>
+                            <li data-insight-item="2">
+                                <span class="insight-chip">Upside</span>
+                                <p data-insight-text="2">Unlock $1.3M in upsell by bundling adoption coaching into enterprise plans.</p>
+                            </li>
+                        </ul>
+                        <div class="insight-footer">
+                            <div class="confidence-meta">
+                                <span class="confidence-label">Confidence</span>
+                                <span class="confidence-value" data-confidence-value>68%</span>
+                            </div>
+                            <div class="confidence-meter">
+                                <div class="confidence-bar" data-confidence-bar style="width: 68%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
         
         <!-- Content Grid -->
         <div class="content-grid">
@@ -267,9 +385,11 @@
     
     <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.5/dist/chart.umd.min.js"></script>
     
     <!-- Custom JS -->
     <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/dashboard-insights.js"></script>
 </body>
 </html>
 
